@@ -1,0 +1,14 @@
+# Ignore logs
+*.log
+
+# Ignore Terraform files
+*.tfstate
+.terraform/
+
+# Ignore Node modules
+node_modules/
+
+# Ignore IDE files
+.vscode/
+.idea/
+.terraform.lock.hcl

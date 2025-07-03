@@ -25,14 +25,24 @@ module "sg_ec2" {
   vpc_id                  = module.vpc.vpc_id
   description             = "Security group for ${local.name_prefix} EC2 instances"
   ingress_rules           = ["http-80-tcp"]
-  ingress_security_groups = [module.sg_alb.security_group_id]
-
+  
+  ingress_with_source_security_group_id = [
+    {
+      from_port                     = 80
+      to_port                       = 80
+      protocol                      = "tcp"
+      source_security_group_id      = module.sg_alb.security_group_id
+      description                   = "Allow HTTP traffic from ALB"
+    }
+  ]
   egress_rules       = ["all-all"]
-  egress_cidr_blocks = [""]
+  egress_cidr_blocks = ["0.0.0.0/0"]
   tags = merge(
     {
       Name = "ec2-sg"
     },
     local.common_tags
   )
+
+  depends_on = [module.sg_alb]
 }
