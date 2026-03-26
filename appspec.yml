@@ -6,11 +6,11 @@ files:
 hooks:
   ApplicationStop:
     - location: aws/scripts/application-stop.sh
-      timeout: 300
+      timeout: 400
       runas: root
   BeforeInstall:
     - location: aws/scripts/before-install.sh
-      timeout: 300
+      timeout: 400
       runas: root
   AfterInstall:
     - location: aws/scripts/after-install.sh
